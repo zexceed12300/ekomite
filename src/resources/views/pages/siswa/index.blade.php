@@ -54,7 +54,7 @@
                                 <input type="hidden" name="search" value="{{ request('search') }}">
                                 <button type="submit" class="btn btn-sm btn-error text-white font-bold">Hapus</button>
                             </form>
-                            <a href="{{ route('pembayaran.index', ['nisn' => $siswa->nisn, 'tapel_id' => 1]) }}"
+                            <a href="{{ route('pembayaran.index', ['nisn' => $siswa->nisn]) }}"
                                 class="btn btn-sm btn-primary text-white font-bold">Bayar</a>
                         </td>
                     </tr>
@@ -62,4 +62,26 @@
             </tbody>
         </table>
     </div>
+    @if (session()->has('success'))
+        <label class="swap">
+            <input type="checkbox">
+            <div class="z-20 swap-off toast toast-top toast-center">
+                <div class="alert bg-primary text-white font-bold">
+                    <span>{{ session()->get('success') }}</span>
+                </div>
+            </div>
+            <div class="swap-on"></div>
+        </label>
+    @endif
+    @if (session()->has('warning'))
+        <label class="swap">
+            <input type="checkbox">
+            <div class="z-20 swap-off toast toast-top toast-center">
+                <div class="alert bg-warning text-white font-bold">
+                    <span>{{ session()->get('warning') }}</span>
+                </div>
+            </div>
+            <div class="swap-on"></div>
+        </label>
+    @endif
 @endsection

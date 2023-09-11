@@ -28,7 +28,7 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'nisn' => 'required|string',
+            'nisn' => 'required|string|unique:siswas',
             'nama' => 'required|string',
             'sumbangan' => 'required|numeric',
             'alamat' => 'string|nullable',
@@ -42,7 +42,8 @@ class SiswaController extends Controller
         ]);
 
         Siswa::create($validateData);
-        return redirect()->route('siswa.index');
+        return redirect()->route('siswa.index')->with('success', "Data {$validateData['nama']} berhasil ditambahkan");
+
     }
 
     public function update(Request $request, Siswa $siswa) 
@@ -62,7 +63,7 @@ class SiswaController extends Controller
         ]);
 
         $siswa->update($validateData);
-        return redirect()->route('siswa.index');
+        return redirect()->route('siswa.index')->with('warning', "Data {$validateData['nama']} berhasil diubah");
     }
 
     public function destroy(Siswa $siswa)

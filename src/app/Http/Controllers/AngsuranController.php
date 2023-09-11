@@ -36,7 +36,7 @@ class AngsuranController extends Controller
         ]);
 
         Angsuran::create($validateData);
-        return redirect()->route('angsuran.index');
+        return redirect()->route('angsuran.index')->with('success', "Angsuran {$validateData['ket']} berhasil ditambahkan");
     }
 
     /**
@@ -70,6 +70,6 @@ class AngsuranController extends Controller
     {
         $angsuran->delete();
 
-        return redirect()->route('angsuran.index');
+        return redirect()->route('angsuran.index')->with('error', "Angsuran {$angsuran->ket} berhasil dihapus");
     }
 }

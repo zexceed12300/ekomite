@@ -35,7 +35,7 @@ class TapelController extends Controller
         ]);
         
         Tapel::create($validateData);
-        return redirect()->route('tapel.index');
+        return redirect()->route('tapel.index')->with('success', "Tapel {$validateData['tahun_pelajaran']} berhasil ditambahkan");
     }
 
     /**
@@ -69,6 +69,6 @@ class TapelController extends Controller
     {
         $tapel->delete();
 
-        return redirect()->route('tapel.index');
+        return redirect()->route('tapel.index')->with('error', "Tapel {$tapel->tahun_pelajaran} berhasil dihapus");
     }
 }
