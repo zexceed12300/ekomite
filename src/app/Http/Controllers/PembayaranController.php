@@ -20,7 +20,7 @@ class PembayaranController extends Controller
         $angsurans = Angsuran::all();
         
         $nisn = $request->nisn;
-        $tapel_id = $request->tapel_id;
+        $tapel_id = $request->tapel_id ?? Tapel::first()->id;
         
         // pembayarans left join angsurans on pembayarans.angsuran_id = angsurans.id right join tapels on pembayarans.tapel_id = tapels.id where pembayarans.siswa_id = 1 and pembayarans.tapel_id = 1
         // $pembayarans = Pembayaran::select('pembayarans.*', 'angsurans.*')

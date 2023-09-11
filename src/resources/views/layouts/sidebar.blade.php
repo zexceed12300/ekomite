@@ -14,7 +14,7 @@
                 <span><i class="fa-solid fa-money-bill-1 w-4"></i></span>
                 <h4>Pembayaran</h1>
             </a>
-            <a href="/laporan?tapel_id=1" class="flex gap-6 hover:bg-primary px-4 py-3 text-base {{ (request()->is('laporan')) ? 'bg-primary' : '' }}">
+            <a href="/laporan" class="flex gap-6 hover:bg-primary px-4 py-3 text-base {{ (request()->is('laporan')) ? 'bg-primary' : '' }}">
                 <span><i class="fa-solid fa-receipt w-4"></i></span>
                 <h4>Laporan</h1>
             </a>

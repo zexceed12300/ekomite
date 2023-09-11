@@ -17,7 +17,7 @@ class LaporanController extends Controller
     public function index(Request $request)
     {
         $nisn = $request->nisn;
-        $tapel_id = $request->tapel_id;
+        $tapel_id = $request->tapel_id ?? Tapel::first()->id;
 
         $laporans = [];
 
