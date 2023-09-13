@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AngsuranController;
+use App\Http\Controllers\BendaharaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PembayaranController;
@@ -23,13 +24,15 @@ use Illuminate\Support\Facades\Route;
 Route::resource('/', DashboardController::class)->middleware(['auth']);
 
 Route::resource('siswa', SiswaController::class)->middleware(['auth']);
-Route::resource('angsuran', AngsuranController::class)->middleware(['auth']);
-Route::resource('tapel', TapelController::class)->middleware(['auth']);
+Route::resource('angsuran', AngsuranController::class)->middleware(['auth', 'permission:manage settings']);
+Route::resource('tapel', TapelController::class)->middleware(['auth', 'permission:manage settings']);
 
-Route::resource('laporan', LaporanController::class)->middleware(['auth']);
-Route::get('/laporan-download', [LaporanController::class, 'download'])->name('laporan.download')->middleware(['auth']);
+Route::resource('laporan', LaporanController::class)->middleware(['auth', 'permission:manage pembayaran']);
+Route::get('/laporan-download', [LaporanController::class, 'download'])->name('laporan.download')->middleware(['auth', 'permission:manage pembayaran']);
 
-Route::resource('pembayaran', PembayaranController::class)->middleware(['auth']);
+Route::resource('pembayaran', PembayaranController::class)->middleware(['auth', 'permission:manage pembayaran']);
+
+Route::resource('bendahara', BendaharaController::class)->middleware(['auth', 'role:admin']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

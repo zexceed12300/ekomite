@@ -21,6 +21,10 @@ class PembayaranController extends Controller
         
         $nisn = $request->nisn;
         $tapel_id = $request->tapel_id ?? Tapel::first()->id;
+
+        if (Tapel::find($tapel_id) == null) {
+            return redirect()->route('pembayaran.index', ['nisn' => $request->nisn, 'tapel_id' => Tapel::first()->id])->with('warning', 'Tahun pelajaran tidak ditemukan');
+        }
         
         // pembayarans left join angsurans on pembayarans.angsuran_id = angsurans.id right join tapels on pembayarans.tapel_id = tapels.id where pembayarans.siswa_id = 1 and pembayarans.tapel_id = 1
         // $pembayarans = Pembayaran::select('pembayarans.*', 'angsurans.*')

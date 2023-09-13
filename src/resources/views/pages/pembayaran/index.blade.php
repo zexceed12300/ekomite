@@ -115,4 +115,37 @@
         </div>
     </div>
     @endif
+    @if (session()->has('success'))
+        <label class="swap">
+            <input type="checkbox">
+            <div class="z-20 swap-off toast toast-top toast-center">
+                <div class="alert bg-primary text-white font-bold">
+                    <span>{{ session()->get('success') }}</span>
+                </div>
+            </div>
+            <div class="swap-on"></div>
+        </label>
+    @endif
+    @if (session()->has('warning'))
+        <label class="swap">
+            <input type="checkbox">
+            <div class="z-20 swap-off toast toast-top toast-center">
+                <div class="alert bg-warning text-white font-bold">
+                    <span>{{ session()->get('warning') }}</span>
+                </div>
+            </div>
+            <div class="swap-on"></div>
+        </label>
+    @endif
+	@if (session()->has('error'))
+        <label class="swap">
+            <input type="checkbox">
+            <div class="z-20 swap-off toast toast-top toast-center">
+                <div class="alert bg-error text-white font-bold">
+                    <span>{{ session()->get('error') }}</span>
+                </div>
+            </div>
+            <div class="swap-on"></div>
+        </label>
+    @endif
 @endsection

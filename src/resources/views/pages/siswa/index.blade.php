@@ -46,14 +46,16 @@
                             <div class="badge badge-warning text-white font-bold">Rp. {{ $siswa->sumbangan }}</div>
                         </td>
                         <td class="flex gap-2">
-                            <a href="{{ route('siswa.edit', $siswa) }}"
-                                class="btn btn-sm btn-warning text-white font-bold">Ubah</a>
-                            <form method="POST" action="{{ route('siswa.destroy', $siswa) }}">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="search" value="{{ request('search') }}">
-                                <button type="submit" class="btn btn-sm btn-error text-white font-bold">Hapus</button>
-                            </form>
+                            @can('manage siswa')
+                                <a href="{{ route('siswa.edit', $siswa) }}"
+                                    class="btn btn-sm btn-warning text-white font-bold">Ubah</a>
+                                <form method="POST" action="{{ route('siswa.destroy', $siswa) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="search" value="{{ request('search') }}">
+                                    <button type="submit" class="btn btn-sm btn-error text-white font-bold">Hapus</button>
+                                </form>
+                            @endcan
                             <a href="{{ route('pembayaran.index', ['nisn' => $siswa->nisn]) }}"
                                 class="btn btn-sm btn-primary text-white font-bold">Bayar</a>
                         </td>
@@ -79,6 +81,17 @@
             <div class="z-20 swap-off toast toast-top toast-center">
                 <div class="alert bg-warning text-white font-bold">
                     <span>{{ session()->get('warning') }}</span>
+                </div>
+            </div>
+            <div class="swap-on"></div>
+        </label>
+    @endif
+	@if (session()->has('error'))
+        <label class="swap">
+            <input type="checkbox">
+            <div class="z-20 swap-off toast toast-top toast-center">
+                <div class="alert bg-error text-white font-bold">
+                    <span>{{ session()->get('error') }}</span>
                 </div>
             </div>
             <div class="swap-on"></div>
